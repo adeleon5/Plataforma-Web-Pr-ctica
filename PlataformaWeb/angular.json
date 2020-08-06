@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "PlataformaWeb"
+    }
+  },
+  "defaultProject": "PlataformaWeb",
+  "cli": {
+    "analytics": "3cbdeac0-d79e-45d0-b3dc-a9fc3cc86362"
+  }
 }
