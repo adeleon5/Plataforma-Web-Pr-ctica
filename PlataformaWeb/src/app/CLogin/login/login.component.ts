@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
   username: string;
   password: string;
   message: any;
+  data:any = [];
 
   constructor(private service:ApiRestSBService, private router:Router) { }
 
@@ -20,12 +21,8 @@ export class LoginComponent implements OnInit {
 
   doLogin(){
     let resp = this.service.login(this.username, this.password);
-    console.log(resp);
-    if(resp){
-      this.router.navigate(["/home"]);
-    }else{
-      alert("Usuairo o contraseña invalidos, intente de nuevo")
-    }
+    resp.subscribe(data => this.data = data)
+    console.log(this.data.status);
     
   }
 

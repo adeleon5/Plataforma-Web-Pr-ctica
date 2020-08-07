@@ -11,5 +11,6 @@ export class ApiRestSBService {
   public login(username:string, password:string){
     const headers= new HttpHeaders({Authorization: 'Basic '+btoa(username+':'+password)})
     return this.http.get("http://localhost:8080/usuario/login",{headers, responseType:'text' as 'json'})
+    
   }
 }
