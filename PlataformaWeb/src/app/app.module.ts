@@ -7,7 +7,8 @@ import { LoginComponent } from './CLogin/login/login.component';
 import { HomeComponent } from './Chome/home/home.component';
 import { ApiRestSBService} from './Sapirest/api-rest-sb.service';
 import {FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http'
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
+import {APIInterceptorService} from './Interceptor/apiinterceptor.service'
 
 @NgModule({
   declarations: [
@@ -21,7 +22,14 @@ import {HttpClientModule} from '@angular/common/http'
     FormsModule,
     HttpClientModule
   ],
-  providers: [ApiRestSBService],
+  providers: [
+      ApiRestSBService,
+      {
+        provide: HTTP_INTERCEPTORS,
+        useClass: APIInterceptorService,
+        multi: true
+      },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
