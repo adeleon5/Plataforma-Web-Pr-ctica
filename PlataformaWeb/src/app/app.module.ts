@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './Cprincipal/app.component';
-import { LoginComponent } from './CLogin/login/login.component';
-import { HomeComponent } from './Chome/home/home.component';
+import { LoginComponent } from './CLogin/login.component';
+import { HomeComponent } from './Chome/home.component';
 import { ApiRestSBService} from './Sapirest/api-rest-sb.service';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
