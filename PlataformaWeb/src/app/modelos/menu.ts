@@ -1,7 +1,11 @@
 export class Menu {
-    id: number;
-    icono: string;
-    ruta: String;
-    raiz: number;
-    descripcion: String
+
+    constructor(
+    public id: number,
+    public icono: string,
+    public ruta: string,
+    public raiz: number,
+    public descripcion: string
+    ){}
+
 }

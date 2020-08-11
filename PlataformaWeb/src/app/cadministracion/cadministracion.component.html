@@ -21,7 +21,7 @@
         </select>
        </div>
       <div class="form-group">
-        <select class="custom-select custom-select-sm mb-3" name="lista" [(ngModel)]="usuario.roles.id"  (ngModelChange)="selectRol($event)">
+        <select class="custom-select custom-select-sm mb-3" name="lista" [(ngModel)]="usuario.roles[0].id"  (ngModelChange)="selectRol($event)">
             <option value=0 selected=true disabled=true>SELECCIONE UN ROL</option>
             <option value="{{rol.id}}" *ngFor="let rol of lista">{{rol.descripcion}}</option>
         </select>

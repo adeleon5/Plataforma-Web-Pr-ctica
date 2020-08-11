@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {Usuario} from  '../modelos/usuario'
 import { Observable } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
 
@@ -21,8 +22,16 @@ export class ApiRestSBService {
     return this.http.get("http://localhost:8080/usuario/get?correo="+this.username,{responseType:'json' as 'text'});
   }
 
+  public GetRolMenu(rol:number){
+    return this.http.get("http://localhost:8080/rol/get/"+rol.toString(),{responseType:'json' as 'text'});
+  }
+
   public GetInfoAllUser(){
     return this.http.get("http://localhost:8080/usuario");
+  }
+
+  public AddNewUser(usuario:Usuario){
+    return this,this.http.post<Usuario>("http://localhost:8080/usuario/add",usuario);
   }
 
   public GetUserTest(){
