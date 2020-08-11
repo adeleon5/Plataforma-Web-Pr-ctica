@@ -22,6 +22,7 @@ export class CAdministracionComponent implements OnInit {
   public usr : Usuario;
   public rl : Rol[]=[];
   public mn : Menu[]=[];
+  public listaUsuario:any;
 
 
   public usuario = {
@@ -41,7 +42,7 @@ export class CAdministracionComponent implements OnInit {
     this.lista.push(new RolList(2,"VENTAS"));
     this.estatus.push(new Estatus("S","ACTIVO"));
     this.estatus.push(new Estatus("N","INACTIVO"));
-    console.log("contraseña: ", this.service.GetPassword())
+    this.GetInfoAllUser();
   }
 
   AgregarUsuario(){
@@ -49,6 +50,7 @@ export class CAdministracionComponent implements OnInit {
     this.usr = (new Usuario(this.usuario.activo,this.usuario.clave,this.usuario.correo,this.usuario.id,this.usuario.nombre,this.rl))
     this.service.AddNewUser(this.usr).pipe(map(data => data as any)).subscribe(data =>{
       console.log(data);
+      this.GetInfoAllUser();
     }),(error:any)=>{console.log("errorAgregarUsuario: "+error)};
     console.log(this.usr)
     
@@ -76,5 +78,14 @@ export class CAdministracionComponent implements OnInit {
     },(error)=>{
           console.log('errorcomponentadministracion: ',error.status);
         });
+  }
+
+  public GetInfoAllUser(){
+    this.service.SetUsername("mperalta@gmail.com");
+    this.service.SetPassword("12345");
+    this.service.GetInfoAllUser().pipe(map(data => data as any)).subscribe(data =>{
+      this.listaUsuario = data;
+      console.log(data);
+    }),(error:any)=>{console.log("GetInfoAllUser-ComponentList: ",error)};
   }
 }

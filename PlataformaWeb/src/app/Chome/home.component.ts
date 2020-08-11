@@ -37,8 +37,7 @@ export class HomeComponent implements OnInit {
       this.rol = data[0].roles[0].Descripcion;
       this.menu = data[0].roles[0].menus
       console.log("GetInfoUser: ", data[0].roles[0].menus);
-    } 
-    );
+    }),(error:any)=>{console.log("errorAgregarUsuario: "+error)};
   }
 
   GetUser(){
