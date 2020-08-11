@@ -8,13 +8,15 @@ import { HomeComponent } from './Chome/home.component';
 import { ApiRestSBService} from './Sapirest/api-rest-sb.service';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
-import {APIInterceptorService} from './Interceptor/apiinterceptor.service'
+import {APIInterceptorService} from './Interceptor/apiinterceptor.service';
+import { CAdministracionComponent } from './cadministracion/cadministracion.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    CAdministracionComponent
   ],
   imports: [
     BrowserModule,

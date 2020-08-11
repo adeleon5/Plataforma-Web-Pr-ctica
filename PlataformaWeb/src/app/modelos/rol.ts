@@ -1,6 +1,6 @@
 import {Menu} from './menu'
 export class Rol {
-    descripcion: string;
-    id: number;
-    menus: Menu[];
+
+    constructor(public id: number, public descripcion: string){}
 }
+

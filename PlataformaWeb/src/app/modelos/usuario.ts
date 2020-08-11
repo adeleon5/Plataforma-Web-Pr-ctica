@@ -6,5 +6,5 @@ export class Usuario {
     correo: String;
     id: number;
     nombre: String;
-    roles : Rol;
+    roles : Rol[];
 }

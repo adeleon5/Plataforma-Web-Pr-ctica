@@ -1,0 +1,32 @@
+<div class="container">
+    <h2>Gestión de Usuarios</h2>
+    <p>Agregar, Modificar y Eleminiar Usuarios:</p>
+    <form action="/action_page.php">
+      <div class="form-group">
+        <label for="usr">Nombre:</label>
+        <input type="text" class="form-control" id="usr" name="nombre" [(ngModel)]="usuario.nombre">
+      </div>
+      <div class="form-group">
+        <label for="pwd">Clave:</label>
+        <input type="password" class="form-control" id="pwd" name="clave" [(ngModel)]="usuario.clave">
+      </div>
+      <div class="form-group">
+        <label for="pwd">Corre:</label>
+        <input type="text" class="form-control" id="email" name="correo" [(ngModel)]="usuario.correo">
+      </div>
+      <div class="form-group">
+        <select class="custom-select custom-select-sm mb-3" name="estatus" [(ngModel)]="usuario.activo">
+            <option value="" selected=true disabled>SELECCIONE UN ESTATUS</option>
+            <option value="{{est.id}}" *ngFor="let est of estatus">{{est.descripcion}}</option>
+        </select>
+       </div>
+      <div class="form-group">
+        <select class="custom-select custom-select-sm mb-3" name="lista" [(ngModel)]="usuario.roles.id"  (ngModelChange)="selectRol($event)">
+            <option value=0 selected=true disabled=true>SELECCIONE UN ROL</option>
+            <option value="{{rol.id}}" *ngFor="let rol of lista">{{rol.descripcion}}</option>
+        </select>
+       </div>
+      <button type="submit" class="btn btn-primary" (click)="AgregarUsuario()">Submit</button>
+    </form>
+  </div>
+
