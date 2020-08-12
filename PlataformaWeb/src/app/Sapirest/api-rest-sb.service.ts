@@ -5,6 +5,7 @@ import {Menu} from  '../modelos/menu'
 import { Observable } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
 import { Rol } from '../modelos/rol';
+import { LocalstorageService } from './localstorageservice.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,15 +15,14 @@ export class ApiRestSBService {
   private username:string
   private password:string
 
-  constructor(private http:HttpClient) { }
-
+  constructor(private http:HttpClient, private storage: LocalstorageService) { }
 
   public login(){
     return this.http.get("http://localhost:8080/usuario/login",{responseType:'text' as 'json'});
   }
 
   public GetInfoUser(){
-    return this.http.get("http://localhost:8080/usuario/get?correo="+this.username,{responseType:'json' as 'text'});
+    return this.http.get("http://localhost:8080/usuario/get?correo="+this.storage.get("USER_MAIL"),{responseType:'json' as 'text'});
   }
 
   public GetRolMenu(rol:number){

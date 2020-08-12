@@ -4,6 +4,8 @@ import { map } from 'rxjs/operators';
 import { Menu } from '../modelos/menu';
 import { Rol } from '../modelos/rol';
 import { MenuLista} from '../modelos/menulista';
+import { LocalstorageService } from '../Sapirest/localstorageservice.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cmenu',
@@ -21,9 +23,12 @@ export class CMenuComponent implements OnInit {
   public esactualizacionmenu: boolean=false;
   public escreacionrol: boolean=false;
 
-  constructor(private service: ApiRestSBService) { }
+  constructor(private service: ApiRestSBService, private storage: LocalstorageService, private router:Router) { }
 
   ngOnInit(): void {
+    if(!this.storage.get("AUTENTICATE")){
+      this.router.navigate(["/login"])
+    }
     this.GetAllMenu();
     this.GetAllRol();
     this.cleanMenuAdd();

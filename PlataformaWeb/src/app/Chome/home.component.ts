@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { Rol } from '../modelos/rol';
 import {Usuario} from '../modelos/usuario';
 import {Menu} from '../modelos/menu';
+import { LocalstorageService } from '../Sapirest/localstorageservice.service';
 
 
 @Component({
@@ -23,13 +24,17 @@ export class HomeComponent implements OnInit {
   public correo:String ="";
   public rol:String = "";
   
-  constructor(private service: ApiRestSBService, private router:Router) { }
+  constructor(private service: ApiRestSBService, private router:Router, private storage: LocalstorageService) { }
 
   ngOnInit(): void {
+    if(!this.storage.get("AUTENTICATE")){
+      this.router.navigate(["/login"])
+    }
     this.GetInfoUser()
   }
 
   GetInfoUser(){
+    console.log("prueba de localstorage ", this.storage.get("USER_MAIL"))
     this.service.GetInfoUser().pipe(map(data =>data as any)).subscribe(data=>{
       this.usuario=data
       this.nombre = data[0].nombre;
@@ -46,6 +51,10 @@ export class HomeComponent implements OnInit {
       console.log(this.test);
     } 
     );
+  }
+
+  CloseSession(){
+    this.storage.clear();
   }
 
 }

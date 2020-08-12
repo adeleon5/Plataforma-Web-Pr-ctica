@@ -7,8 +7,10 @@ import {Estatus} from '../modelos/estatus'
 import { ApiRestSBService } from '../Sapirest/api-rest-sb.service';
 import { map } from 'rxjs/operators';
 import { formatNumber } from '@angular/common';
-import { UrlSegment } from '@angular/router';
+import { UrlSegment, Router } from '@angular/router';
 import { ConstantPool } from '@angular/compiler';
+import { LocalstorageService } from '../Sapirest/localstorageservice.service';
+import { Route } from '@angular/compiler/src/core';
 
 @Component({
   selector: 'app-cadministracion',
@@ -38,11 +40,12 @@ export class CAdministracionComponent implements OnInit {
   }
 
 
-  constructor(private service: ApiRestSBService) { }
+  constructor(private service: ApiRestSBService, private storage:LocalstorageService, private router:Router) { }
 
   ngOnInit(): void {
-    //this.lista.push(new RolList(1,"SUPER USUARIO"));
-    //this.lista.push(new RolList(2,"VENTAS"));
+    if(!this.storage.get("AUTENTICATE")){
+      this.router.navigate(["/login"])
+    }
     this.GetAllRol();
     this.estatus.push(new Estatus("S","ACTIVO"));
     this.estatus.push(new Estatus("N","INACTIVO"));
@@ -50,8 +53,6 @@ export class CAdministracionComponent implements OnInit {
   }
 
   GetAllRol(){
-    this.service.SetUsername("adeleon@gmail.com");
-    this.service.SetPassword("12345");
     this.service.GetAllRol().pipe(map(data =>data as any)).subscribe(data=>{
       this.lista = data; 
     console.log("GetAllRolComponentMenu: ", this.lista);
@@ -69,8 +70,6 @@ export class CAdministracionComponent implements OnInit {
     this.usr.activo = this.usuario.activo
     this.usr.roles = this.rl
     //console.log(this.usr)
-    this.service.SetUsername("adeleon@gmail.com");
-    this.service.SetPassword("12345");
     this.service.AddNewUser(this.usr).pipe(map(data => data as any)).subscribe(data =>{
       //console.log(data);
       this.GetInfoAllUser();
@@ -90,8 +89,6 @@ export class CAdministracionComponent implements OnInit {
     this.usr.activo = this.usuario.activo
     this.usr.roles = this.rl
     console.log("EditaUsuario2: ", this.usr)
-    this.service.SetUsername("adeleon@gmail.com");
-    this.service.SetPassword("12345");
     this.service.AddNewUser(this.usr).pipe(map(data => data as any)).subscribe(data =>{
       console.log(data);
       this.Clean();
@@ -108,8 +105,6 @@ export class CAdministracionComponent implements OnInit {
   }
 
   GetRolMenu(rol:number){
-    this.service.SetUsername("adeleon@gmail.com");
-    this.service.SetPassword("12345");
     this.service.GetRolMenu(rol).pipe(map(data =>data as any)).subscribe(data=>{
       this.menu = data.value.menus; 
       //console.log(this.menu)   
@@ -125,8 +120,6 @@ export class CAdministracionComponent implements OnInit {
   }
 
   public GetInfoAllUser(){
-    this.service.SetUsername("adeleon@gmail.com");
-    this.service.SetPassword("12345");
     this.service.GetInfoAllUser().pipe(map(data => data as Usuario)).subscribe(data =>{
       this.listaUsuario = data
       console.log("GetInfoAllUserAdmin: ", data);
