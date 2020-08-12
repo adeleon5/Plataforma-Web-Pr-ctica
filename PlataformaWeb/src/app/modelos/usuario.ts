@@ -2,14 +2,16 @@ import {Rol} from './rol'
 
 export class Usuario {
 
-    constructor(
-        public activo: String,
-        public clave: String,
-        public correo: String,
-        public id: number,
-        public nombre: String,
-        public roles :Rol[]
+    //constructor(
         //public roles : Rol,
-    ){}
+    //){}
+    constructor(){}
+
+    activo:string;
+    clave: string;
+    correo: string;
+    id: number;
+    nombre: string;
+    roles :Rol[]
 
 }

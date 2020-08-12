@@ -10,6 +10,7 @@ import {FormsModule} from '@angular/forms';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
 import {APIInterceptorService} from './Interceptor/apiinterceptor.service';
 import { CAdministracionComponent } from './cadministracion/cadministracion.component';
+import { CMenuComponent } from './cmenu/cmenu.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { CAdministracionComponent } from './cadministracion/cadministracion.comp
     LoginComponent,
     HomeComponent,
     CAdministracionComponent,
+    CMenuComponent,
   ],
   imports: [
     BrowserModule,

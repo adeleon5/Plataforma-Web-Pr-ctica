@@ -7,5 +7,4 @@ export class Menu {
     public raiz: number,
     public descripcion: string
     ){}
-
 }

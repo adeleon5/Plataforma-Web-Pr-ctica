@@ -16,7 +16,7 @@
         <input type="text" class="form-control" id="email" name="correo" [(ngModel)]="usuario.correo">
       </div>
       <div class="form-group">
-        <select class="custom-select custom-select-sm mb-3" name="estatus" [(ngModel)]="usuario.activo">
+        <select class="custom-select custom-select-sm mb-3" name="activo" [(ngModel)]="usuario.activo">
             <option value="" selected=true disabled>SELECCIONE UN ESTATUS</option>
             <option value="{{est.id}}" *ngFor="let est of estatus">{{est.descripcion}}</option>
         </select>
@@ -27,7 +27,9 @@
             <option value="{{rol.id}}" *ngFor="let rol of lista">{{rol.descripcion}}</option>
         </select>
        </div>
-      <button type="submit" class="btn btn-primary" (click)="AgregarUsuario()">Submit</button>
+      <button type="submit" class="btn btn-primary btn-block py-2" (click)="AgregarUsuario()" *ngIf="!habilitarbotonEdit">Agregar</button>
+      <button type="submit" class="btn btn-primary btn-block py-2" (click)="EditarUsuario()" *ngIf="habilitarbotonEdit">Actualizar</button>
+      <button type="submit" class="btn btn-danger btn-block py-2" (click)="Cancelar()">Cancelar</button>
     </form>
   </div>
   <div class="container col-sm-4">
@@ -43,11 +45,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of listaUsuario">
-          <td>{{item.Id}}</td>
-          <td>{{item.Nombre}}</td>
-          <td>{{item.Correo}}</td>
-          <td>{{item.Activo}}</td>
+        <tr *ngFor="let item of listaUsuario" (click)="EditUser(item)">
+          <td>{{item.id}}</td>
+          <td>{{item.nombre}}</td>
+          <td>{{item.correo}}</td>
+          <td>{{item.activo}}</td>
         </tr>
       </tbody>
     </table>

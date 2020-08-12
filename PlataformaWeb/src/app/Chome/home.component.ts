@@ -32,9 +32,9 @@ export class HomeComponent implements OnInit {
   GetInfoUser(){
     this.service.GetInfoUser().pipe(map(data =>data as any)).subscribe(data=>{
       this.usuario=data
-      this.nombre = data[0].Nombre;
-      this.correo = data[0].Correo;
-      this.rol = data[0].roles[0].Descripcion;
+      this.nombre = data[0].nombre;
+      this.correo = data[0].correo;
+      this.rol = data[0].roles[0].descripcion;
       this.menu = data[0].roles[0].menus
       console.log("GetInfoUser: ", data[0].roles[0].menus);
     }),(error:any)=>{console.log("errorAgregarUsuario: "+error)};
@@ -47,4 +47,5 @@ export class HomeComponent implements OnInit {
     } 
     );
   }
+
 }
