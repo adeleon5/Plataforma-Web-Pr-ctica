@@ -27,14 +27,14 @@
             <option value="{{rol.id}}" *ngFor="let rol of lista">{{rol.descripcion}}</option>
         </select>
        </div>
-      <button type="submit" class="btn btn-primary btn-block py-2" (click)="AgregarUsuario()" *ngIf="!habilitarbotonEdit">Agregar</button>
-      <button type="submit" class="btn btn-primary btn-block py-2" (click)="EditarUsuario()" *ngIf="habilitarbotonEdit">Actualizar</button>
+      <button type="submit" class="btn btn-dark btn-block py-2" (click)="AgregarUsuario()" *ngIf="!habilitarbotonEdit">Agregar</button>
+      <button type="submit" class="btn btn-dark btn-block py-2" (click)="EditarUsuario()" *ngIf="habilitarbotonEdit">Actualizar</button>
       <button type="submit" class="btn btn-danger btn-block py-2" (click)="Cancelar()">Cancelar</button>
     </form>
   </div>
   <div class="container col-sm-4">
     <h2>Lista de Usuarios</h2>
-    <p>Modificación y Eliminación de Usuarios:</p>            
+    <p>Modificación y Eliminación de Usuarios:</p>        
     <table class="table table-bordered">
       <thead>
         <tr>

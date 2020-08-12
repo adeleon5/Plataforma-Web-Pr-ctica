@@ -24,10 +24,8 @@ import { CMenuComponent } from './cmenu/cmenu.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
-  ],
-  exports:[
-  ],
+    HttpClientModule,
+    ],
   providers: [
       ApiRestSBService,
       {

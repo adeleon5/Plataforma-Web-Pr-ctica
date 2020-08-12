@@ -41,11 +41,23 @@ export class CAdministracionComponent implements OnInit {
   constructor(private service: ApiRestSBService) { }
 
   ngOnInit(): void {
-    this.lista.push(new RolList(1,"SUPER USUARIO"));
-    this.lista.push(new RolList(2,"VENTAS"));
+    //this.lista.push(new RolList(1,"SUPER USUARIO"));
+    //this.lista.push(new RolList(2,"VENTAS"));
+    this.GetAllRol();
     this.estatus.push(new Estatus("S","ACTIVO"));
     this.estatus.push(new Estatus("N","INACTIVO"));
     this.GetInfoAllUser();
+  }
+
+  GetAllRol(){
+    this.service.SetUsername("adeleon@gmail.com");
+    this.service.SetPassword("12345");
+    this.service.GetAllRol().pipe(map(data =>data as any)).subscribe(data=>{
+      this.lista = data; 
+    console.log("GetAllRolComponentMenu: ", this.lista);
+    },(error)=>{
+          console.log('errorcomponentadministracion: ',error.status);
+        });
   }
 
   AgregarUsuario(){
@@ -90,9 +102,9 @@ export class CAdministracionComponent implements OnInit {
   selectRol($event) {
        this.rl = []
        let id:number = $event
-       this.rl.push(new Rol(id,this.lista[$event-1 ].descripcion,this.mn))
-    //console.log(this.rl);
-    this.GetRolMenu($event);
+       let desc = this.lista.find(item => item.id == id).descripcion;
+       this.rl.push(new Rol(id,desc,this.mn))
+    this.GetRolMenu(id);
   }
 
   GetRolMenu(rol:number){
@@ -106,7 +118,7 @@ export class CAdministracionComponent implements OnInit {
         this.mn.push(new Menu(this.menu[i].id, this.menu[i].icono, this.menu[i].ruta, this.menu[i].raiz, this.menu[i].descripcion));
       }
       this.rl[0].menus = this.mn;
-      //console.log("GetRolMenuCOmponent: ", this.mn);
+      console.log("GetRolMenuCOmponent: ", this.mn);
     },(error)=>{
           console.log('errorcomponentadministracion: ',error.status);
         });
@@ -117,11 +129,12 @@ export class CAdministracionComponent implements OnInit {
     this.service.SetPassword("12345");
     this.service.GetInfoAllUser().pipe(map(data => data as Usuario)).subscribe(data =>{
       this.listaUsuario = data
-      //console.log("GetInfoAllUserAdmin: ", data);
+      console.log("GetInfoAllUserAdmin: ", data);
     }),(error:any)=>{console.log("GetInfoAllUser-ComponentList: ",error)};
   }
 
   public EditUser(usr:Usuario){
+    console.log("EditUser: ", this.usuario)
     this.rl = []
     this.rl.push(new Rol(usr.roles[0].id,usr.roles[0].descripcion,usr.roles[0].menus))
     this.usuario.id = usr.id;
@@ -131,7 +144,6 @@ export class CAdministracionComponent implements OnInit {
     this.usuario.activo = usr.activo;
     this.usuario.roles = this.rl
     this.habilitarbotonEdit = true;
-    //console.log("EditUser: ", this.usuario)
   }
 
   public Cancelar(){
